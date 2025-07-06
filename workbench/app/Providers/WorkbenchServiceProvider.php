@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Honed\Stats\Overview;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +27,9 @@ class WorkbenchServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Use lazy loading for overviews by default due to defer requiring Inertia 2.0.
+        Overview::configureUsing(fn (Overview $overview) => $overview
+            ->lazy()
+        );
     }
 }

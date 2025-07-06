@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Console\Command;
 
-arch()->preset()->php()->ignoring('debug_backtrace');
+arch()->preset()->php();
 
 arch()->preset()->security();
 

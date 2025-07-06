@@ -147,7 +147,7 @@ describe('loading strategies', function () {
                 ->{'products_count'}->toBeInstanceOf(DeferProp::class)
                 ->{'products_sum_price'}->toBeInstanceOf(DeferProp::class)
             );
-    });
+    })->skip(fn () => ! class_exists(DeferProp::class));
 
     it('uses lazy loading', function () {
         expect($this->overview)
@@ -184,21 +184,21 @@ describe('evaluation', function () {
         $this->overview = $this->user->stats();
     });
 
-    it('has named dependencies', function ($closure) {
-        expect($this->overview->evaluate($closure))->toBeInstanceOf(User::class);
+    it('has named dependencies', function ($closure, $class) {
+        expect($this->overview->evaluate($closure))->toBeInstanceOf($class);
     })->with([
-        'model' => fn () => [fn ($model) => $model],
-        'record' => fn () => [fn ($record) => $record],
-        'row' => fn () => [fn ($row) => $row, User::class],
+        'model' => fn () => [fn ($model) => $model, User::class],
+        'record' => fn () => [fn ($record) => $record, User::class],
+        'row' => fn () => [fn ($row) => $row, User::class]
     ]);
 
-    it('has typed dependencies', function ($closure) {
-        expect($this->overview->evaluate($closure))->toBeInstanceOf(User::class);
+    it('has typed dependencies', function ($closure, $class) {
+        expect($this->overview->evaluate($closure))->toBeInstanceOf($class);
     })->with([
-        'class' => fn () => [fn (Model $arg) => $arg],
-        'model' => fn () => [fn (User $arg) => $arg],
+        'model' => fn () => [fn (User $arg) => $arg, User::class],
+        'class' => fn () => [fn (Model $arg) => $arg, Model::class],
     ]);
-})->skip();
+});
 
 it('is macroable', function () {
     Overview::macro('test', function () {
