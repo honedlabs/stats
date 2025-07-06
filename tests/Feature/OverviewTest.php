@@ -9,7 +9,6 @@ use Honed\Stats\Stat;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Inertia\DeferProp;
-use Inertia\IgnoreFirstLoad;
 use Inertia\LazyProp;
 
 beforeEach(function () {
@@ -189,7 +188,7 @@ describe('evaluation', function () {
     })->with([
         'model' => fn () => [fn ($model) => $model, User::class],
         'record' => fn () => [fn ($record) => $record, User::class],
-        'row' => fn () => [fn ($row) => $row, User::class]
+        'row' => fn () => [fn ($row) => $row, User::class],
     ]);
 
     it('has typed dependencies', function ($closure, $class) {

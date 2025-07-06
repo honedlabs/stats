@@ -5,7 +5,6 @@ declare(strict_types=1);
 use App\Responses\IndexUserResponse;
 use Honed\Stats\Overview;
 use Honed\Stats\Stat;
-use Inertia\IgnoreFirstLoad;
 use Inertia\LazyProp;
 
 beforeEach(function () {
