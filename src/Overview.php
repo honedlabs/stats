@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Inertia\DeferProp;
+use Inertia\IgnoreFirstLoad;
 use Inertia\Inertia;
 use Inertia\LazyProp;
 use Throwable;

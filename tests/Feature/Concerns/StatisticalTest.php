@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Responses\IndexUserResponse;
 use Honed\Stats\Overview;
 use Honed\Stats\Stat;
+use Inertia\IgnoreFirstLoad;
 use Inertia\LazyProp;
 
 beforeEach(function () {
@@ -80,8 +81,8 @@ it('has overview props', function () {
                 ->{0}
                 ->scoped(fn ($value) => $value
                     ->toBeArray()
-                    ->toHaveKeys(['value', 'label'])
-                    ->{'value'}->toBe('users')
+                    ->toHaveKeys(['name', 'label'])
+                    ->{'name'}->toBe('users')
                     ->{'label'}->toBe('Users')
                 )
             )
