@@ -15,8 +15,10 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Inertia\DeferProp;
 use Inertia\IgnoreFirstLoad;
 use Inertia\Inertia;
+use Inertia\LazyProp;
 use Throwable;
 
 /**
@@ -197,7 +199,7 @@ class Overview extends Primitive
     /**
      * Get the stats.
      *
-     * @return array<string, IgnoreFirstLoad>
+     * @return array<string, LazyProp|DeferProp>
      */
     protected function getProps(): array
     {
@@ -225,7 +227,7 @@ class Overview extends Primitive
     /**
      * Create the deferred newProp.
      */
-    protected function newProp(Stat $stat): IgnoreFirstLoad
+    protected function newProp(Stat $stat): LazyProp|DeferProp
     {
         $callback = fn () => $this->getValue($stat);
 

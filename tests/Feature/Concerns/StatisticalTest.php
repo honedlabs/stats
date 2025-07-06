@@ -6,6 +6,7 @@ use App\Responses\IndexUserResponse;
 use Honed\Stats\Overview;
 use Honed\Stats\Stat;
 use Inertia\IgnoreFirstLoad;
+use Inertia\LazyProp;
 
 beforeEach(function () {
     $this->response = new IndexUserResponse();
@@ -80,12 +81,12 @@ it('has overview props', function () {
                 ->{0}
                 ->scoped(fn ($value) => $value
                     ->toBeArray()
-                    // ->toHaveKeys(['value', 'label'])
-                    // ->{'value'}->toBe('users')
-                    // ->{'label'}->toBe('Users')
+                    ->toHaveKeys(['value', 'label'])
+                    ->{'value'}->toBe('users')
+                    ->{'label'}->toBe('Users')
                 )
             )
             ->{'_stat_key'}->toBe(Overview::PROP)
-            ->{'users'}->toBeInstanceOf(IgnoreFirstLoad::class)
+            ->{'users'}->toBeInstanceOf(LazyProp::class)
         );
 });
