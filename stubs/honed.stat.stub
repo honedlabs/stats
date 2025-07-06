@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use Honed\Stats\Stat;
+
+class {{ class }} extends Stat
+{
+    /**
+     * Define the stat.
+     *
+     * @return $this
+     */
+    protected function definition(): static
+    {
+        return $this;
+    }
+}

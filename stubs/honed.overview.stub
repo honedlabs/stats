@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use Honed\Stats\Overview;
+
+class {{ class }} extends Overview
+{
+    /**
+     * Define the overview.
+     *
+     * @return $this
+     */
+    protected function definition(): static
+    {
+        return $this;
+    }
+}
