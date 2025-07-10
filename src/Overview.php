@@ -160,22 +160,14 @@ class Overview extends Primitive
     }
 
     /**
-     * Define the profile.
-     *
-     * @return $this
-     */
-    protected function definition(): static
-    {
-        return $this;
-    }
-
-    /**
      * Get the representation of the instance.
      *
      * @return array<string,mixed>
      */
     protected function representation(): array
     {
+        $this->define();
+
         return [
             '_values' => $this->getPairs(),
             '_stat_key' => self::PROP,
