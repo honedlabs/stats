@@ -5,24 +5,27 @@ declare(strict_types=1);
 namespace Honed\Stats;
 
 use Closure;
-use Honed\Core\Concerns\CanHaveAttributes;
-use Honed\Core\Concerns\CanHaveIcon;
+use Honed\Core\Concerns\HasAttributes;
+use Honed\Core\Concerns\HasDescription;
+use Honed\Core\Concerns\HasIcon;
 use Honed\Core\Concerns\HasLabel;
 use Honed\Core\Concerns\HasName;
 use Honed\Core\Contracts\NullsAsUndefined;
 use Honed\Core\Primitive;
-use Honed\Stats\Concerns\CanHaveDescription;
-use Honed\Stats\Concerns\CanHaveGroup;
+use Honed\Stats\Concerns\HasGroup;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 
+/**
+ * @extends \Honed\Core\Primitive<string, mixed>
+ */
 class Stat extends Primitive implements NullsAsUndefined
 {
-    use CanHaveAttributes;
-    use CanHaveDescription;
-    use CanHaveGroup;
-    use CanHaveIcon;
+    use HasAttributes;
+    use HasDescription;
+    use HasGroup;
+    use HasIcon;
     use HasLabel;
     use HasName;
 

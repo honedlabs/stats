@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Honed\Stats\Concerns;
 
-trait CanHaveGroup
+trait HasGroup
 {
     /**
      * The group for the instance.
