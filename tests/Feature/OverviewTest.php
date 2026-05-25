@@ -6,10 +6,10 @@ use App\Models\User;
 use App\Overviews\UserOverview;
 use Honed\Stats\Overview;
 use Honed\Stats\Stat;
+use Honed\Stats\Support\InertiaProp;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Inertia\DeferProp;
-use Inertia\LazyProp;
 
 beforeEach(function () {
     $this->overview = Overview::make();
@@ -124,7 +124,7 @@ it('has array representation', function () {
                 ])
             )
             ->{'_stat_key'}->toBe(Overview::PROP)
-            ->{'orders'}->toBeInstanceOf(LazyProp::class)
+            ->{'orders'}->toBeInstanceOf(InertiaProp::optionalClass())
         );
 });
 
@@ -155,9 +155,9 @@ describe('loading strategies', function () {
             ->scoped(fn ($array) => $array
                 ->toBeArray()
                 ->toHaveKeys(['_values', '_stat_key', 'fixed', 'products_count', 'products_sum_price'])
-                ->{'fixed'}->toBeInstanceOf(LazyProp::class)
-                ->{'products_count'}->toBeInstanceOf(LazyProp::class)
-                ->{'products_sum_price'}->toBeInstanceOf(LazyProp::class)
+                ->{'fixed'}->toBeInstanceOf(InertiaProp::optionalClass())
+                ->{'products_count'}->toBeInstanceOf(InertiaProp::optionalClass())
+                ->{'products_sum_price'}->toBeInstanceOf(InertiaProp::optionalClass())
             );
     });
 
@@ -171,7 +171,7 @@ describe('loading strategies', function () {
                 ->toHaveKeys(['_values', '_stat_key'])
                 ->toHaveKey(Overview::PROP)
                 ->{'_stat_key'}->toBe(Overview::PROP)
-                ->{Overview::PROP}->toBeInstanceOf(LazyProp::class)
+                ->{Overview::PROP}->toBeInstanceOf(InertiaProp::optionalClass())
             );
     });
 });

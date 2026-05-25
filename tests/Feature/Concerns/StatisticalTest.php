@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Responses\IndexUserResponse;
 use Honed\Stats\Overview;
 use Honed\Stats\Stat;
-use Inertia\LazyProp;
+use Honed\Stats\Support\InertiaProp;
 
 beforeEach(function () {
     $this->response = new IndexUserResponse();
@@ -86,6 +86,6 @@ it('has overview props', function () {
                 )
             )
             ->{'_stat_key'}->toBe(Overview::PROP)
-            ->{'users'}->toBeInstanceOf(LazyProp::class)
+            ->{'users'}->toBeInstanceOf(InertiaProp::optionalClass())
         );
 });

@@ -10,6 +10,7 @@ use Honed\Core\Primitive;
 use Honed\Stats\Concerns\CanGroup;
 use Honed\Stats\Concerns\Deferrable;
 use Honed\Stats\Concerns\HasStats;
+use Honed\Stats\Support\InertiaProp;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +18,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Inertia\DeferProp;
 use Inertia\Inertia;
-use Inertia\LazyProp;
+use Inertia\OptionalProp;
 use Throwable;
 
 /**
@@ -190,7 +191,7 @@ class Overview extends Primitive
     /**
      * Get the stats.
      *
-     * @return array<string, LazyProp|DeferProp>
+     * @return array<string, OptionalProp|DeferProp>
      */
     protected function getProps(): array
     {
@@ -198,7 +199,7 @@ class Overview extends Primitive
 
         if ($key = $this->getStatKey()) {
             return [
-                $key => Inertia::lazy(fn () => Arr::mapWithKeys(
+                $key => InertiaProp::optional(fn () => Arr::mapWithKeys(
                     $stats,
                     fn (Stat $stat) => [
                         $stat->getName() => $this->getValue($stat),
@@ -218,12 +219,12 @@ class Overview extends Primitive
     /**
      * Create the deferred newProp.
      */
-    protected function newProp(Stat $stat): LazyProp|DeferProp
+    protected function newProp(Stat $stat): OptionalProp|DeferProp
     {
         $callback = fn () => $this->getValue($stat);
 
         return match (true) {
-            $this->isLazy() => Inertia::lazy($callback),
+            $this->isLazy() => InertiaProp::optional($callback),
             default => Inertia::defer($callback, $stat->getGroup() ?? 'default'),
         };
     }
