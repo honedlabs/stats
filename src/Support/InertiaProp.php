@@ -12,7 +12,7 @@ final class InertiaProp
     /**
      * Create an optional Inertia prop (formerly known as lazy in Inertia v1/v2).
      */
-    public static function optional(callable $callback): OptionalProp
+    public static function optional(callable $callback): mixed
     {
         if (class_exists(OptionalProp::class)) {
             return Inertia::optional($callback);

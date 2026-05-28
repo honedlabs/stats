@@ -16,9 +16,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Inertia\DeferProp;
 use Inertia\Inertia;
-use Inertia\OptionalProp;
 use Throwable;
 
 /**
@@ -191,7 +189,7 @@ class Overview extends Primitive
     /**
      * Get the stats.
      *
-     * @return array<string, OptionalProp|DeferProp>
+     * @return array<string, mixed>
      */
     protected function getProps(): array
     {
@@ -218,8 +216,10 @@ class Overview extends Primitive
 
     /**
      * Create the deferred newProp.
+     *
+     * @return mixed
      */
-    protected function newProp(Stat $stat): OptionalProp|DeferProp
+    protected function newProp(Stat $stat)
     {
         $callback = fn () => $this->getValue($stat);
 
